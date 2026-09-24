@@ -1,0 +1,944 @@
+/* ==========================================================================
+   ЦВЕТОВАЯ ПАЛИТРА КЛУБА "ЛЕГИОН"
+   Все цвета собраны в CSS-переменных (custom properties), чтобы их можно
+   было менять в одном месте и не искать по всему файлу.
+
+   --color-dark    графитово-чёрный  — фон "серьёзных" секций (шапка, hero, форма).
+                   Ассоциация: сила, дисциплина, серьёзный настрой.
+   --color-dark-2  чуть светлее тёмного — карточки/элементы на тёмном фоне.
+   --color-accent  энергичный красный — кнопки, акценты, всё, что должно
+                   "цеплять" взгляд. Ассоциация: энергия, динамика, удар.
+   --color-light   светлый фон — основной фон страницы, чтобы сайт не был
+                   слишком мрачным и не пугал родителей.
+   --color-gold    золотой — акцент направления "Тхэквондо" и элементов
+                   доверия (рейтинг, награды). Ассоциация: традиции, статус.
+   ========================================================================== */
+
+:root {
+  --color-dark: #1a1a1f;
+  --color-dark-2: #24242c;
+  --color-accent: #e63946;
+  --color-accent-hover: #c92c38;
+  --color-light: #f5f5f3;
+  --color-white: #ffffff;
+  --color-gold: #d4af37;
+  --color-text-dark: #1a1a1f;
+  --color-text-muted: #6b6b70;
+  --color-text-on-dark: #f5f5f3;
+  --color-border: #e3e2df;
+
+  /* Шрифты: Oswald — заголовки (спортивный, "плотный"), Inter — текст */
+  --font-heading: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', Arial, sans-serif;
+
+  /* Немного скруглений и теней, чтобы карточки выглядели современно и мягко */
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(26, 26, 31, 0.08);
+  --container-width: 1180px;
+}
+
+/* ==========================================================================
+   БАЗОВЫЙ СБРОС СТИЛЕЙ (RESET)
+   Убираем стандартные отступы браузера и приводим box-sizing к единому
+   виду — так проще считать размеры блоков (padding не увеличивает ширину).
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* базовая плавная прокрутка на случай, если JS отключён */
+  scroll-padding-top: 80px; /* чтобы секция не пряталась под фиксированной шапкой */
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background: var(--color-light);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Общий контейнер — ограничивает ширину контента и центрирует его */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   ТИПОГРАФИКА ЗАГОЛОВКОВ СЕКЦИЙ
+   ========================================================================== */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--color-text-muted);
+  max-width: 560px;
+  margin: 12px auto 0;
+}
+
+/* Модификаторы для заголовков на тёмном фоне (например, в форме заявки) */
+.section-title--light {
+  color: var(--color-white);
+  text-align: left;
+  margin: 0;
+}
+
+.section-subtitle--light {
+  color: #c9c9ce;
+  text-align: left;
+  margin: 12px 0 0;
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
+   КНОПКИ
+   Три варианта: акцентная (заливка красным), контурная (обводка) —
+   переиспользуются по всему сайту.
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--accent {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.btn--accent:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn--outline {
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+}
+
+.btn--outline:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.btn--lg {
+  padding: 16px 34px;
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   ШАПКА САЙТА (HEADER)
+   position: fixed — шапка всегда видна сверху при прокрутке.
+   Поэтому у body/секций ниже нужен отступ (см. .hero padding-top).
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(26, 26, 31, 0.95);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.logo__dot {
+  color: var(--color-accent);
+}
+
+/* Само меню: на десктопе — обычный горизонтальный флекс-ряд */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav__list {
+  display: flex;
+  gap: 24px;
+}
+
+.nav__link {
+  color: var(--color-text-on-dark);
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.nav__link:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.header__phone {
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+/* Кнопка-гамбургер спрятана на десктопе, показываем её только на мобильных
+   (см. медиа-запрос ниже) */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+}
+
+.burger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--color-white);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* ==========================================================================
+   ГЕРОЙ-БЛОК (HERO)
+   ========================================================================== */
+.hero {
+  background: radial-gradient(circle at top right, #2a2a33 0%, var(--color-dark) 60%);
+  color: var(--color-text-on-dark);
+  padding: 150px 0 90px;
+  text-align: center;
+}
+
+.hero__eyebrow {
+  color: var(--color-gold);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 6vw, 64px);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero__subtitle {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #d3d3d8;
+  font-size: 18px;
+}
+
+.hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+/* Контурная кнопка на тёмном фоне должна быть светлой, а не тёмной,
+   поэтому переопределяем цвет обводки/текста именно в hero */
+.hero .btn--outline {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+.hero .btn--outline:hover {
+  background: var(--color-white);
+  color: var(--color-dark);
+}
+
+/* "Цифры доверия" — рейтинг, число учеников и т.д. */
+.hero__trust {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 56px;
+}
+
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trust-badge__value {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+.trust-badge__label {
+  font-size: 13px;
+  color: #b8b8bd;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   ПРЕИМУЩЕСТВА
+   Сетка карточек через CSS Grid: auto-fit + minmax сам решает,
+   сколько колонок поместится на экране — без media-запросов для колонок.
+   ========================================================================== */
+.advantages {
+  padding: 90px 0;
+}
+
+.advantages__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.advantage-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.advantage-card:hover {
+  transform: translateY(-6px);
+}
+
+.advantage-card__icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.advantage-card__title {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.advantage-card__text {
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+/* ==========================================================================
+   НАПРАВЛЕНИЯ (Бокс / Тхэквондо / ММА)
+   ========================================================================== */
+.directions {
+  padding: 90px 0;
+  background: var(--color-white);
+}
+
+.directions__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.direction-card {
+  background: var(--color-dark);
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Карточка тхэквондо чуть выделена золотым — это "флагманское" направление клуба */
+.direction-card--gold {
+  border: 2px solid var(--color-gold);
+}
+
+.direction-card__badge {
+  align-self: flex-start;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.direction-card--gold .direction-card__badge {
+  background: var(--color-gold);
+  color: var(--color-dark);
+}
+
+.direction-card__title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.direction-card__text {
+  color: #c9c9ce;
+  font-size: 15px;
+}
+
+.direction-card__list {
+  font-size: 14px;
+  color: #b8b8bd;
+}
+
+.direction-card__list li {
+  padding: 4px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.direction-card .btn {
+  margin-top: auto;
+  align-self: flex-start;
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+.direction-card .btn:hover {
+  background: var(--color-white);
+  color: var(--color-dark);
+}
+
+.directions__note {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+/* ==========================================================================
+   РАСПИСАНИЕ
+   ========================================================================== */
+.schedule {
+  padding: 90px 0;
+  text-align: center;
+}
+
+.schedule__table-wrap {
+  overflow-x: auto; /* на узких экранах таблицу можно прокрутить по горизонтали */
+  margin: 48px 0 32px;
+}
+
+.schedule__table {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.schedule__table th,
+.schedule__table td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.schedule__table th {
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.schedule__row-off td {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   ТРЕНЕРЫ
+   ========================================================================== */
+.trainers {
+  padding: 90px 0;
+  background: var(--color-white);
+}
+
+.trainers__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.trainer-card {
+  text-align: center;
+  padding: 30px 24px;
+  border-radius: var(--radius);
+  background: var(--color-light);
+}
+
+/* Круглая "заглушка" вместо фото — инициалы тренера на цветном фоне.
+   Когда появятся реальные фотографии, замените этот div на <img>. */
+.trainer-card__photo {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--color-dark);
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trainer-card__name {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  text-transform: uppercase;
+}
+
+.trainer-card__role {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 14px;
+  margin: 6px 0 12px;
+}
+
+.trainer-card__text {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   ГАЛЕРЕЯ (ЗАГЛУШКА)
+   ========================================================================== */
+.gallery {
+  padding: 90px 0;
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+
+/* Заглушка одного элемента галереи: серый прямоугольник с диагональной
+   штриховкой (создана градиентом, без картинок) — явно читается как "тут
+   будет фото", а не как готовый дизайн. */
+.gallery-item {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  background: repeating-linear-gradient(
+    45deg,
+    #e3e2df,
+    #e3e2df 12px,
+    #ecebe8 12px,
+    #ecebe8 24px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   ОТЗЫВЫ
+   ========================================================================== */
+.testimonials {
+  padding: 90px 0;
+  background: var(--color-white);
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.testimonial-card {
+  background: var(--color-light);
+  border-left: 4px solid var(--color-gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 26px 24px;
+}
+
+.testimonial-card__text {
+  font-size: 15px;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+}
+
+.testimonial-card__author {
+  font-style: normal;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.testimonials__more {
+  text-align: center;
+  margin-top: 36px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.testimonials__more a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   ФОРМА ЗАЯВКИ
+   Двухколоночная сетка: слева — текст и телефон, справа — сама форма.
+   На мобильных превращается в одну колонку (media-запрос ниже).
+   ========================================================================== */
+.application-form {
+  background: var(--color-dark);
+  padding: 90px 0;
+}
+
+.form-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.form-intro {
+  padding-top: 8px;
+}
+
+.phone-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--color-gold);
+}
+
+.form {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form__label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form__input {
+  padding: 12px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form__radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.form__radio,
+.form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.form__submit {
+  margin-top: 8px;
+}
+
+/* Сообщение об успехе/ошибке отправки формы. По умолчанию скрыто —
+   JS показывает его и добавляет класс form__message--success или --error */
+.form__message {
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 20px;
+}
+
+.form__message--success {
+  color: #2e8b57;
+}
+
+.form__message--error {
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
+   ПОДВАЛ (FOOTER)
+   ========================================================================== */
+.footer {
+  background: #101014;
+  color: #a9a9ae;
+  padding: 70px 0 0;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo--footer {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.footer__title {
+  font-family: var(--font-heading);
+  color: var(--color-white);
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.footer__text {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.footer__text a:hover,
+.footer__link:hover {
+  color: var(--color-accent);
+}
+
+.footer__link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.footer__nav li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.footer__nav a:hover {
+  color: var(--color-accent);
+}
+
+.footer__bottom {
+  text-align: center;
+  font-size: 13px;
+  padding: 22px 0;
+}
+
+/* ==========================================================================
+   ПЛАВАЮЩАЯ КНОПКА ЗАПИСИ
+   Всегда видна поверх контента в правом нижнем углу — быстрый доступ
+   к форме заявки с любого места страницы.
+   ========================================================================== */
+.floating-cta {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+  z-index: 900;
+  transition: transform 0.15s ease;
+}
+
+.floating-cta:hover {
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ (MEDIA QUERIES)
+   Ключевая точка перелома — 900px: ниже неё прячем десктопное меню
+   и показываем гамбургер. Второй перелом — 600px, для мелких телефонов.
+   ========================================================================== */
+@media (max-width: 900px) {
+
+  /* Показываем гамбургер и прячем обычное меню по умолчанию */
+  .burger {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: var(--color-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 20px 24px 30px;
+    transform: translateY(-150%); /* меню спрятано над экраном */
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  /* Класс is-open добавляет/убирает script.js при клике на гамбургер */
+  .nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  .nav__list li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav__link {
+    display: block;
+    padding: 14px 0;
+  }
+
+  .header__phone {
+    display: block;
+    margin: 16px 0;
+  }
+
+  .nav__cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Крестик из гамбургера, когда меню открыто (класс ставит JS) */
+  .burger.is-active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .burger.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger.is-active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .hero {
+    padding: 130px 0 70px;
+  }
+
+  .form-wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__trust {
+    gap: 24px;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-cta {
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}

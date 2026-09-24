@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Легион — клуб единоборств в Домодедово | Бокс, Тхэквондо, ММА</title>
+  <meta name="description" content="Спортивный клуб «Легион» в Домодедово: бокс, тхэквондо и ММА для детей от 5 лет и взрослых. Опытные тренеры, бесплатное пробное занятие.">
+
+  <!-- Подключаем шрифты Google Fonts: Oswald — для заголовков (спортивный, энергичный),
+       Inter — для основного текста (простой и удобный для чтения) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Подключаем нашу таблицу стилей -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       ШАПКА САЙТА (HEADER)
+       Содержит: логотип, меню навигации, телефон и кнопку CTA.
+       На мобильных устройствах меню прячется за "гамбургер"-кнопку,
+       которая открывается через JavaScript (см. script.js).
+  ========================================================== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+
+      <!-- Логотип / название клуба -->
+      <a href="#hero" class="logo">Легион<span class="logo__dot">.</span></a>
+
+      <!-- Основное меню. id="nav-menu" используется в JS для показа/скрытия на мобильных -->
+      <nav class="nav" id="nav-menu">
+        <ul class="nav__list">
+          <li><a href="#hero" class="nav__link">Главная</a></li>
+          <li><a href="#directions" class="nav__link">Направления</a></li>
+          <li><a href="#schedule" class="nav__link">Расписание</a></li>
+          <li><a href="#trainers" class="nav__link">Тренеры</a></li>
+          <li><a href="#gallery" class="nav__link">Галерея</a></li>
+          <li><a href="#contacts" class="nav__link">Контакты</a></li>
+        </ul>
+        <!-- Телефон и кнопка записи дублируются внутри мобильного меню -->
+        <a href="tel:+79261667590" class="header__phone">+7 (926) 166-75-90</a>
+        <a href="#application-form" class="btn btn--accent nav__cta">Записаться</a>
+      </nav>
+
+      <!-- Кнопка-гамбургер для мобильной версии. Состоит из трёх span-полосок,
+           которые CSS превращает в крестик при добавлении класса "is-active" -->
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =========================================================
+         ГЕРОЙ-БЛОК (HERO)
+         Первый экран сайта: слоган, подзаголовок, кнопки-призывы
+         к действию и короткие "цифры доверия".
+    ========================================================== -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <p class="hero__eyebrow">Клуб единоборств «Легион» · Домодедово</p>
+        <h1 class="hero__title">Сила растёт <span class="text-accent">с дисциплиной</span></h1>
+        <p class="hero__subtitle">
+          Бокс, тхэквондо и ММА для детей от 5 лет и взрослых новичков.
+          Опытные тренеры, безопасные тренировки и первое занятие — бесплатно.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#application-form" class="btn btn--accent btn--lg">Записаться на пробное занятие</a>
+          <a href="#schedule" class="btn btn--outline btn--lg">Смотреть расписание</a>
+        </div>
+
+        <!-- Блок доверия: реальный рейтинг клуба с Яндекс.Карт -->
+        <div class="hero__trust">
+          <div class="trust-badge">
+            <span class="trust-badge__value">4,9</span>
+            <span class="trust-badge__label">рейтинг на<br>Яндекс.Картах</span>
+          </div>
+          <div class="trust-badge">
+            <span class="trust-badge__value">105+</span>
+            <span class="trust-badge__label">довольных<br>учеников</span>
+          </div>
+          <div class="trust-badge">
+            <span class="trust-badge__value">3</span>
+            <span class="trust-badge__label">направления:<br>бокс, тхэквондо, ММА</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ПРЕИМУЩЕСТВА
+         Сетка карточек — почему стоит выбрать именно этот клуб.
+         На мобильных карточки складываются в один столбец (см. CSS).
+    ========================================================== -->
+    <section class="advantages" id="advantages">
+      <div class="container">
+        <h2 class="section-title">Почему выбирают «Легион»</h2>
+        <p class="section-subtitle">Заботимся о безопасности детей и результате взрослых</p>
+
+        <div class="advantages__grid">
+          <div class="advantage-card">
+            <div class="advantage-card__icon">🥋</div>
+            <h3 class="advantage-card__title">Опытные тренеры</h3>
+            <p class="advantage-card__text">Работают с детьми с раннего возраста, знают, как выстроить безопасную и эффективную нагрузку.</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-card__icon">🛡️</div>
+            <h3 class="advantage-card__title">Безопасность прежде всего</h3>
+            <p class="advantage-card__text">Группы формируются по возрасту и уровню подготовки, занятия проходят под постоянным контролем.</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-card__icon">🏆</div>
+            <h3 class="advantage-card__title">Участие в соревнованиях</h3>
+            <p class="advantage-card__text">Готовим воспитанников к турнирам разного уровня — от районных до региональных.</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-card__icon">🕒</div>
+            <h3 class="advantage-card__title">Удобное расписание</h3>
+            <p class="advantage-card__text">Группы утром, днём и вечером — легко подобрать время для ребёнка или взрослого.</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-card__icon">🎁</div>
+            <h3 class="advantage-card__title">Бесплатное пробное занятие</h3>
+            <p class="advantage-card__text">Можно прийти и попробовать перед тем, как принять решение и купить абонемент.</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-card__icon">🏋️</div>
+            <h3 class="advantage-card__title">Просторные залы</h3>
+            <p class="advantage-card__text">Зал бокса, зал восточных единоборств и тренажёрный зал — комфортно и не тесно.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         НАПРАВЛЕНИЯ (Бокс / Тхэквондо / ММА)
+         Каждая карточка ведёт к форме записи с якорем на конкретное
+         направление (можно потом донастроить, чтобы select в форме
+         выбирался автоматически через JS, если понадобится).
+    ========================================================== -->
+    <section class="directions" id="directions">
+      <div class="container">
+        <h2 class="section-title">Направления</h2>
+        <p class="section-subtitle">Выберите то, что подходит вам или вашему ребёнку</p>
+
+        <div class="directions__grid">
+
+          <!-- Карточка "Бокс" -->
+          <article class="direction-card">
+            <div class="direction-card__badge">Бокс</div>
+            <h3 class="direction-card__title">Бокс</h3>
+            <p class="direction-card__text">
+              Развивает реакцию, координацию и уверенность в себе. Подходит детям от 6 лет и взрослым
+              без опыта — начинаем с базовой техники и общей физической подготовки.
+            </p>
+            <ul class="direction-card__list">
+              <li>Группы: дети 6–12, подростки 12–16, взрослые</li>
+              <li>Зал: отдельный зал бокса</li>
+            </ul>
+            <a href="#application-form" class="btn btn--outline">Записаться на бокс</a>
+          </article>
+
+          <!-- Карточка "Тхэквондо" -->
+          <article class="direction-card direction-card--gold">
+            <div class="direction-card__badge">Тхэквондо</div>
+            <h3 class="direction-card__title">Тхэквондо</h3>
+            <p class="direction-card__text">
+              Основное направление клуба. Корейское боевое искусство, которое воспитывает дисциплину,
+              гибкость и уважение — отлично подходит для самых маленьких учеников от 5 лет.
+            </p>
+            <ul class="direction-card__list">
+              <li>Группы: дети 5–7, дети 8–12, подростки, взрослые</li>
+              <li>Зал: зал восточных единоборств</li>
+            </ul>
+            <a href="#application-form" class="btn btn--outline">Записаться на тхэквондо</a>
+          </article>
+
+          <!-- Карточка "ММА" -->
+          <article class="direction-card">
+            <div class="direction-card__badge">ММА</div>
+            <h3 class="direction-card__title">Смешанные единоборства (ММА)</h3>
+            <p class="direction-card__text">
+              Для подростков от 14 лет и взрослых, которые хотят разносторонней подготовки: ударная
+              техника, борьба и партер в одном направлении.
+            </p>
+            <ul class="direction-card__list">
+              <li>Группы: подростки 14–16, взрослые (новички и продолжающие)</li>
+              <li>Зал: зал единоборств + тренажёрный зал</li>
+            </ul>
+            <a href="#application-form" class="btn btn--outline">Записаться на ММА</a>
+          </article>
+
+        </div>
+
+        <p class="directions__note">
+          В клубе также есть секции борьбы, кикбоксинга, каратэ и ОФП — уточняйте у администратора по телефону.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         РАСПИСАНИЕ
+         Показываем реальные часы работы клуба (по данным Яндекс.Карт).
+         Точное расписание групп по направлениям лучше уточнять у
+         администратора — оно может меняться, поэтому здесь честно
+         указаны только часы работы зала, а не выдуманное расписание групп.
+    ========================================================== -->
+    <section class="schedule" id="schedule">
+      <div class="container">
+        <h2 class="section-title">Расписание работы клуба</h2>
+        <p class="section-subtitle">Точное время тренировок по вашему направлению уточнит администратор</p>
+
+        <div class="schedule__table-wrap">
+          <table class="schedule__table">
+            <thead>
+              <tr>
+                <th>День недели</th>
+                <th>Время работы</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Понедельник</td><td>18:30–23:00</td></tr>
+              <tr><td>Вторник</td><td>16:30–23:00</td></tr>
+              <tr><td>Среда</td><td>18:30–23:00</td></tr>
+              <tr><td>Четверг</td><td>16:30–23:00</td></tr>
+              <tr><td>Пятница</td><td>18:30–23:00</td></tr>
+              <tr><td>Суббота</td><td>10:00–23:00</td></tr>
+              <tr class="schedule__row-off"><td>Воскресенье</td><td>Выходной</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#application-form" class="btn btn--accent">Уточнить время и записаться</a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ТРЕНЕРЫ
+         ВАЖНО: имена, фото и описания ниже — временные placeholder-данные.
+         Замените их на реальную информацию о тренерах клуба «Легион»
+         (фото, звания/разряды, специализация).
+    ========================================================== -->
+    <section class="trainers" id="trainers">
+      <div class="container">
+        <h2 class="section-title">Наши тренеры</h2>
+        <p class="section-subtitle">Профессионалы, которые умеют находить подход к детям и взрослым</p>
+
+        <div class="trainers__grid">
+
+          <div class="trainer-card">
+            <div class="trainer-card__photo" aria-hidden="true">АП</div>
+            <h3 class="trainer-card__name">Алексей Петров</h3>
+            <p class="trainer-card__role">Тренер по боксу</p>
+            <p class="trainer-card__text">Мастер спорта по боксу. Более 10 лет готовит детей и взрослых, включая подготовку к турнирам.</p>
+          </div>
+
+          <div class="trainer-card">
+            <div class="trainer-card__photo" aria-hidden="true">ИК</div>
+            <h3 class="trainer-card__name">Ирина Ким</h3>
+            <p class="trainer-card__role">Тренер по тхэквондо</p>
+            <p class="trainer-card__text">Чёрный пояс, 2 дан. Специализируется на группах для самых маленьких учеников — от 5 лет.</p>
+          </div>
+
+          <div class="trainer-card">
+            <div class="trainer-card__photo" aria-hidden="true">ДС</div>
+            <h3 class="trainer-card__name">Дмитрий Соколов</h3>
+            <p class="trainer-card__role">Тренер по ММА</p>
+            <p class="trainer-card__text">Действующий спортсмен, тренирует ударную технику и борьбу для подростков и взрослых.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ГАЛЕРЕЯ (ЗАГЛУШКА)
+         Здесь пока нет реальных фото/видео с тренировок — блок
+         оформлен как заглушка. Просто замените div.gallery-item
+         на теги <img src="..." alt="..."> или <video>, когда
+         появятся настоящие фотографии из зала.
+    ========================================================== -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <h2 class="section-title">Фото и видео с тренировок</h2>
+        <p class="section-subtitle">Скоро здесь появятся настоящие фотографии из зала «Легион»</p>
+
+        <div class="gallery__grid">
+          <!-- Каждый gallery-item — временная заглушка одного и того же вида -->
+          <div class="gallery-item"><span>Фото / видео</span></div>
+          <div class="gallery-item"><span>Фото / видео</span></div>
+          <div class="gallery-item"><span>Фото / видео</span></div>
+          <div class="gallery-item"><span>Фото / видео</span></div>
+          <div class="gallery-item"><span>Фото / видео</span></div>
+          <div class="gallery-item"><span>Фото / видео</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ОТЗЫВЫ
+         Короткие обобщённые впечатления учеников и родителей
+         (по мотивам отзывов клуба на Яндекс.Картах, рейтинг 4,9).
+         Ссылка ведёт на реальную страницу клуба со всеми отзывами.
+    ========================================================== -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2 class="section-title">Что говорят ученики и родители</h2>
+
+        <div class="testimonials__grid">
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__text">«Отличные тренеры и большой просторный зал — не тесный подвал, а нормальное пространство для тренировок».</p>
+            <cite class="testimonial-card__author">— взрослый ученик клуба</cite>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__text">«Занимаемся с ребёнком уже несколько лет: дружелюбная атмосфера, грамотно дозированные нагрузки и видимый результат».</p>
+            <cite class="testimonial-card__author">— родитель ученика</cite>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__text">«Сын занимается с удовольствием, тренеры находят подход даже к самым маленьким».</p>
+            <cite class="testimonial-card__author">— родитель ученика</cite>
+          </blockquote>
+        </div>
+
+        <p class="testimonials__more">
+          Рейтинг клуба 4,9 на основе 105 оценок ·
+          <a href="https://yandex.ru/maps/org/legion/31535284599/" target="_blank" rel="noopener">все отзывы на Яндекс.Картах</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ФОРМА ЗАЯВКИ
+         Простая форма записи на пробное занятие. Обработка отправки —
+         в script.js. Сейчас форма ничего никуда не отправляет на сервер:
+         она только проверяет заполненность полей и показывает
+         сообщение об успехе. Чтобы заявки реально приходили вам
+         (на почту, в CRM или в мессенджер), нужно подключить бэкенд
+         или сервис форм (например, Яндекс.Формы, Telegram-бот и т.п.)
+         и заменить console.log(...) внутри script.js на реальную отправку.
+    ========================================================== -->
+    <section class="application-form" id="application-form">
+      <div class="container form-wrap">
+        <div class="form-intro">
+          <h2 class="section-title section-title--light">Записаться на бесплатное пробное занятие</h2>
+          <p class="section-subtitle section-subtitle--light">
+            Оставьте заявку — администратор свяжется с вами, чтобы согласовать удобное время.
+          </p>
+          <a class="phone-link" href="tel:+79261667590">+7 (926) 166-75-90</a>
+        </div>
+
+        <form class="form" id="application-form-el" novalidate>
+          <div class="form__row">
+            <label for="name" class="form__label">Ваше имя</label>
+            <input type="text" id="name" name="name" class="form__input" placeholder="Как к вам обращаться" required>
+          </div>
+
+          <div class="form__row">
+            <label for="phone" class="form__label">Телефон</label>
+            <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
+          </div>
+
+          <div class="form__row">
+            <label for="direction" class="form__label">Направление</label>
+            <select id="direction" name="direction" class="form__input" required>
+              <option value="" disabled selected>Выберите направление</option>
+              <option value="boxing">Бокс</option>
+              <option value="taekwondo">Тхэквондо</option>
+              <option value="mma">ММА</option>
+              <option value="not-sure">Ещё не решил(а)</option>
+            </select>
+          </div>
+
+          <div class="form__row">
+            <span class="form__label">Для кого занятие</span>
+            <div class="form__radio-group">
+              <label class="form__radio"><input type="radio" name="who" value="child" checked> Ребёнок</label>
+              <label class="form__radio"><input type="radio" name="who" value="adult"> Взрослый</label>
+            </div>
+          </div>
+
+          <div class="form__row form__row--checkbox">
+            <label class="form__checkbox">
+              <input type="checkbox" id="agree" name="agree" required>
+              Согласен(на) на обработку персональных данных
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn--accent btn--lg form__submit">Отправить заявку</button>
+
+          <!-- Сюда JS будет выводить сообщение об успехе или ошибке -->
+          <p class="form__message" id="form-message" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       ПОДВАЛ (FOOTER)
+       Реальные контакты клуба «Легион» (данные с Яндекс.Карт):
+       адрес, телефон, часы работы, ссылка на карту.
+  ========================================================== -->
+  <footer class="footer" id="contacts">
+    <div class="container footer__inner">
+
+      <div class="footer__col">
+        <a href="#hero" class="logo logo--footer">Легион<span class="logo__dot">.</span></a>
+        <p class="footer__text">Спортивный клуб «Легион» — бокс, тхэквондо и ММА для детей и взрослых в Домодедово.</p>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__title">Контакты</h3>
+        <p class="footer__text">
+          <a href="tel:+79261667590">+7 (926) 166-75-90</a>
+        </p>
+        <p class="footer__text">
+          ул. Константиновская Фабрика, 20, Домодедово, этаж 2
+        </p>
+        <a href="https://yandex.ru/maps/org/legion/31535284599/" target="_blank" rel="noopener" class="footer__link">
+          Показать на карте →
+        </a>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__title">Часы работы</h3>
+        <p class="footer__text">Пн, Ср, Пт: 18:30–23:00</p>
+        <p class="footer__text">Вт, Чт: 16:30–23:00</p>
+        <p class="footer__text">Сб: 10:00–23:00</p>
+        <p class="footer__text">Вс: выходной</p>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__title">Навигация</h3>
+        <ul class="footer__nav">
+          <li><a href="#directions">Направления</a></li>
+          <li><a href="#schedule">Расписание</a></li>
+          <li><a href="#trainers">Тренеры</a></li>
+          <li><a href="#application-form">Записаться</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="container footer__bottom">
+      <p>© <span id="current-year"></span> Спортивный клуб «Легион». Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- Плавающая кнопка быстрой записи — видна на любом месте страницы -->
+  <a href="#application-form" class="floating-cta" aria-label="Записаться на пробное занятие">Записаться</a>
+
+  <!-- Подключаем скрипт в конце body, чтобы он выполнялся после загрузки HTML -->
+  <script src="js/script.js"></script>
+</body>
+</html>
