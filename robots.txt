@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ali1986470.github.io/legion-club/sitemap.xml
