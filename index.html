@@ -89,7 +89,7 @@
         </ul>
         <!-- Телефон и кнопка записи дублируются внутри мобильного меню -->
         <a href="tel:+79261667590" class="header__phone">+7 (926) 166-75-90</a>
-        <a href="#application-form" class="btn btn--accent nav__cta">Записаться</a>
+        <a href="#contact-trainer" data-open-contact class="btn btn--accent nav__cta">Связаться с тренером</a>
       </nav>
 
       <!-- Кнопка-гамбургер для мобильной версии. Состоит из трёх span-полосок,
@@ -120,7 +120,7 @@
         </p>
 
         <div class="hero__actions">
-          <a href="#application-form" class="btn btn--accent btn--lg">Записаться на пробное занятие</a>
+          <a href="#contact-trainer" data-open-contact class="btn btn--accent btn--lg">Связаться с тренером</a>
           <a href="#schedule" class="btn btn--outline btn--lg">Смотреть расписание</a>
         </div>
 
@@ -212,7 +212,7 @@
               <li>Группы: дети 6–12, подростки 12–16, взрослые</li>
               <li>Зал: отдельный зал бокса</li>
             </ul>
-            <a href="#application-form" class="btn btn--outline">Записаться на бокс</a>
+            <a href="#contact-trainer" data-open-contact class="btn btn--outline">Связаться с тренером</a>
           </article>
 
           <!-- Карточка "Тхэквондо" -->
@@ -227,7 +227,7 @@
               <li>Группы: дети 5–7, дети 8–12, подростки, взрослые</li>
               <li>Зал: зал восточных единоборств</li>
             </ul>
-            <a href="#application-form" class="btn btn--outline">Записаться на тхэквондо</a>
+            <a href="#contact-trainer" data-open-contact class="btn btn--outline">Связаться с тренером</a>
           </article>
 
           <!-- Карточка "ММА" -->
@@ -242,7 +242,7 @@
               <li>Группы: подростки 14–16, взрослые (новички и продолжающие)</li>
               <li>Зал: зал единоборств + тренажёрный зал</li>
             </ul>
-            <a href="#application-form" class="btn btn--outline">Записаться на ММА</a>
+            <a href="#contact-trainer" data-open-contact class="btn btn--outline">Связаться с тренером</a>
           </article>
 
         </div>
@@ -285,7 +285,7 @@
           </table>
         </div>
 
-        <a href="#application-form" class="btn btn--accent">Уточнить время и записаться</a>
+        <a href="#contact-trainer" data-open-contact class="btn btn--accent">Связаться с тренером</a>
       </div>
     </section>
 
@@ -297,30 +297,16 @@
     ========================================================== -->
     <section class="trainers" id="trainers">
       <div class="container">
-        <h2 class="section-title">Наши тренеры</h2>
-        <p class="section-subtitle">Профессионалы, которые умеют находить подход к детям и взрослым</p>
+        <h2 class="section-title">Наш тренер по боксу</h2>
+        <p class="section-subtitle">Профессионал, который умеет находить подход к детям и взрослым</p>
 
         <div class="trainers__grid">
 
           <div class="trainer-card">
-            <div class="trainer-card__photo" aria-hidden="true">АП</div>
-            <h3 class="trainer-card__name">Алексей Петров</h3>
-            <p class="trainer-card__role">Тренер по боксу</p>
-            <p class="trainer-card__text">Мастер спорта по боксу. Более 10 лет готовит детей и взрослых, включая подготовку к турнирам.</p>
-          </div>
-
-          <div class="trainer-card">
-            <div class="trainer-card__photo" aria-hidden="true">ИК</div>
-            <h3 class="trainer-card__name">Ирина Ким</h3>
-            <p class="trainer-card__role">Тренер по тхэквондо</p>
-            <p class="trainer-card__text">Чёрный пояс, 2 дан. Специализируется на группах для самых маленьких учеников — от 5 лет.</p>
-          </div>
-
-          <div class="trainer-card">
-            <div class="trainer-card__photo" aria-hidden="true">ДС</div>
-            <h3 class="trainer-card__name">Дмитрий Соколов</h3>
-            <p class="trainer-card__role">Тренер по ММА</p>
-            <p class="trainer-card__text">Действующий спортсмен, тренирует ударную технику и борьбу для подростков и взрослых.</p>
+            <img class="trainer-card__img" src="img/trainer-boxing.jpg" alt="Тренер по боксу клуба «Легион»" loading="lazy">
+            <h3 class="trainer-card__name">Тренер по боксу</h3>
+            <p class="trainer-card__role">Тренерский стаж — 20 лет</p>
+            <p class="trainer-card__text">Профессионал своего дела с отличным чувством юмора: на тренировках всегда дружелюбная атмосфера.</p>
           </div>
 
         </div>
@@ -384,67 +370,18 @@
     </section>
 
     <!-- =========================================================
-         ФОРМА ЗАЯВКИ
-         Простая форма записи на пробное занятие. Обработка отправки —
-         в script.js. Сейчас форма ничего никуда не отправляет на сервер:
-         она только проверяет заполненность полей и показывает
-         сообщение об успехе. Чтобы заявки реально приходили вам
-         (на почту, в CRM или в мессенджер), нужно подключить бэкенд
-         или сервис форм (например, Яндекс.Формы, Telegram-бот и т.п.)
-         и заменить console.log(...) внутри script.js на реальную отправку.
+         СВЯЗЬ С ТРЕНЕРОМ
+         Вместо формы заявки — кнопка, которая открывает окно с номером
+         тренера по боксу и ссылками на его мессенджеры (см. модальное
+         окно #contact-modal ниже). Номер и ссылки правятся в одном месте.
     ========================================================== -->
-    <section class="application-form" id="application-form">
-      <div class="container form-wrap">
-        <div class="form-intro">
-          <h2 class="section-title section-title--light">Записаться на бесплатное пробное занятие</h2>
-          <p class="section-subtitle section-subtitle--light">
-            Оставьте заявку — администратор свяжется с вами, чтобы согласовать удобное время.
-          </p>
-          <a class="phone-link" href="tel:+79261667590">+7 (926) 166-75-90</a>
-        </div>
-
-        <form class="form" id="application-form-el" novalidate>
-          <div class="form__row">
-            <label for="name" class="form__label">Ваше имя</label>
-            <input type="text" id="name" name="name" class="form__input" placeholder="Как к вам обращаться" required>
-          </div>
-
-          <div class="form__row">
-            <label for="phone" class="form__label">Телефон</label>
-            <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
-          </div>
-
-          <div class="form__row">
-            <label for="direction" class="form__label">Направление</label>
-            <select id="direction" name="direction" class="form__input" required>
-              <option value="" disabled selected>Выберите направление</option>
-              <option value="boxing">Бокс</option>
-              <option value="taekwondo">Тхэквондо</option>
-              <option value="mma">ММА</option>
-              <option value="not-sure">Ещё не решил(а)</option>
-            </select>
-          </div>
-
-          <div class="form__row">
-            <span class="form__label">Для кого занятие</span>
-            <div class="form__radio-group">
-              <label class="form__radio"><input type="radio" name="who" value="child" checked> Ребёнок</label>
-              <label class="form__radio"><input type="radio" name="who" value="adult"> Взрослый</label>
-            </div>
-          </div>
-
-          <div class="form__row form__row--checkbox">
-            <label class="form__checkbox">
-              <input type="checkbox" id="agree" name="agree" required>
-              Согласен(на) на обработку персональных данных
-            </label>
-          </div>
-
-          <button type="submit" class="btn btn--accent btn--lg form__submit">Отправить заявку</button>
-
-          <!-- Сюда JS будет выводить сообщение об успехе или ошибке -->
-          <p class="form__message" id="form-message" role="status"></p>
-        </form>
+    <section class="application-form" id="contact-trainer">
+      <div class="container contact-cta">
+        <h2 class="section-title section-title--light">Хотите попробовать? Первое занятие — бесплатно</h2>
+        <p class="section-subtitle section-subtitle--light">
+          Напишите или позвоните тренеру по боксу — он ответит на вопросы и подскажет удобное время.
+        </p>
+        <button type="button" class="btn btn--accent btn--lg" data-open-contact>Связаться с тренером</button>
       </div>
     </section>
 
@@ -490,7 +427,7 @@
           <li><a href="#directions">Направления</a></li>
           <li><a href="#schedule">Расписание</a></li>
           <li><a href="#trainers">Тренеры</a></li>
-          <li><a href="#application-form">Записаться</a></li>
+          <li><a href="#contact-trainer" data-open-contact>Связаться с тренером</a></li>
         </ul>
       </div>
 
@@ -501,8 +438,28 @@
     </div>
   </footer>
 
-  <!-- Плавающая кнопка быстрой записи — видна на любом месте страницы -->
-  <a href="#application-form" class="floating-cta" aria-label="Записаться на пробное занятие">Записаться</a>
+  <!-- Окно «Связаться с тренером». Открывается любой кнопкой с атрибутом data-open-contact -->
+  <div class="modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" hidden>
+    <div class="modal__overlay" data-close-contact></div>
+    <div class="modal__box">
+      <button type="button" class="modal__close" aria-label="Закрыть" data-close-contact>×</button>
+      <h2 class="modal__title" id="contact-modal-title">Связаться с тренером</h2>
+      <p class="modal__role">Тренер по боксу</p>
+      <a class="modal__phone" href="tel:+79261667590">+7 (926) 166-75-90</a>
+      <p class="modal__hint">Позвоните или напишите — тренер подскажет удобное время</p>
+
+      <div class="modal__links">
+        <a class="contact-link contact-link--call" href="tel:+79261667590">Позвонить</a>
+        <button type="button" class="contact-link contact-link--copy" id="copy-phone" data-phone="+79261667590">Скопировать номер</button>
+        <a class="contact-link contact-link--wa" href="https://wa.me/79261667590" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="contact-link contact-link--tg" href="https://t.me/LegionDomodedovo" target="_blank" rel="noopener">Telegram</a>
+      </div>
+      <p class="modal__note">В Telegram тренер отвечает редко — быстрее позвонить или написать в WhatsApp.</p>
+    </div>
+  </div>
+
+  <!-- Плавающая кнопка быстрой связи — видна на любом месте страницы -->
+  <a href="#contact-trainer" data-open-contact class="floating-cta" aria-label="Связаться с тренером">Связаться</a>
 
   <!-- Подключаем скрипт в конце body, чтобы он выполнялся после загрузки HTML -->
   <script src="js/script.js"></script>

@@ -522,6 +522,9 @@ button {
 }
 
 .trainers__grid {
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 28px;
@@ -653,100 +656,124 @@ button {
 }
 
 /* ==========================================================================
-   ФОРМА ЗАЯВКИ
-   Двухколоночная сетка: слева — текст и телефон, справа — сама форма.
-   На мобильных превращается в одну колонку (media-запрос ниже).
+   БЛОК «СВЯЗАТЬСЯ С ТРЕНЕРОМ» + МОДАЛЬНОЕ ОКНО
    ========================================================================== */
 .application-form {
   background: var(--color-dark);
   padding: 90px 0;
 }
 
-.form-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
+.contact-cta {
+  text-align: center;
+  max-width: 720px;
 }
 
-.form-intro {
-  padding-top: 8px;
+.contact-cta .section-title,
+.contact-cta .section-subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.phone-link {
-  display: inline-block;
-  margin-top: 24px;
-  font-family: var(--font-heading);
-  font-size: 24px;
-  color: var(--color-gold);
+.contact-cta .btn {
+  margin-top: 28px;
+  cursor: pointer;
+  border: 0;
 }
 
-.form {
-  background: var(--color-white);
-  border-radius: var(--radius);
-  padding: 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.modal[hidden] {
+  display: none;
 }
 
-.form__row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form__label {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.form__input {
-  padding: 12px 14px;
-  border: 1.5px solid var(--color-border);
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 15px;
-}
-
-.form__input:focus {
-  outline: none;
-  border-color: var(--color-accent);
-}
-
-.form__radio-group {
-  display: flex;
-  gap: 20px;
-}
-
-.form__radio,
-.form__checkbox {
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 500;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 14, 0.75);
+}
+
+.modal__box {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 36px 32px 32px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: 0;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--color-text-muted);
   cursor: pointer;
 }
 
-.form__submit {
-  margin-top: 8px;
+.modal__title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  margin: 0 0 4px;
 }
 
-/* Сообщение об успехе/ошибке отправки формы. По умолчанию скрыто —
-   JS показывает его и добавляет класс form__message--success или --error */
-.form__message {
-  font-size: 14px;
-  font-weight: 600;
-  min-height: 20px;
+.modal__role {
+  color: var(--color-text-muted);
+  margin: 0 0 16px;
 }
 
-.form__message--success {
-  color: #2e8b57;
-}
-
-.form__message--error {
+.modal__phone {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 30px;
   color: var(--color-accent);
+}
+
+.modal__hint {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 8px 0 22px;
+}
+
+.modal__links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.contact-link {
+  padding: 13px 10px;
+  border-radius: 10px;
+  color: var(--color-white);
+  font-weight: 600;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.contact-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+.contact-link--call { background: var(--color-dark); }
+.contact-link--wa { background: #25d366; }
+.contact-link--tg { background: #229ed9; }
+
+
+body.modal-open {
+  overflow: hidden;
 }
 
 /* ==========================================================================
@@ -911,11 +938,6 @@ button {
     padding: 130px 0 70px;
   }
 
-  .form-wrap {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
   .footer__inner {
     grid-template-columns: 1fr 1fr;
   }
@@ -941,4 +963,30 @@ button {
     padding: 12px 20px;
     font-size: 14px;
   }
+}
+
+/* Реальное фото тренера (вместо круга с инициалами) */
+.trainer-card__img {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border: 3px solid var(--color-gold);
+}
+
+.modal__note {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 16px 0 0;
+}
+
+.contact-link--copy {
+  background: var(--color-light);
+  color: var(--color-dark);
+  border: 1.5px solid var(--color-border);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }

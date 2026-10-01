@@ -10,14 +10,14 @@
    2. Плавно прокручивает страницу к нужной секции при клике по ссылкам меню
       и закрывает мобильное меню после выбора пункта.
    3. Добавляет шапке лёгкую тень при прокрутке страницы вниз.
-   4. Проверяет форму заявки перед "отправкой" и показывает сообщение.
+   4. Открывает окно «Связаться с тренером» (номер и мессенджеры).
    5. Подставляет текущий год в подвал сайта.
    ========================================================================== */
 
 
 /* --------------------------------------------------------------------------
    1. МОБИЛЬНОЕ МЕНЮ
-   Логика простая: у кнопки-гамбургера и у самого меню есть класс "is-open"
+   Логика простая: у кнопки-гамбургера и у самого меню есть класс 'is-open'
    / "is-active", который включает CSS-стили для видимого состояния
    (см. style.css, блок @media max-width: 900px).
    -------------------------------------------------------------------------- */
@@ -54,6 +54,12 @@ anchorLinks.forEach(function (link) {
     const targetId = link.getAttribute('href'); // например, "#trainers"
     const targetSection = document.querySelector(targetId);
 
+    // Кнопки «Связаться с тренером» открывают окно, а не прокручивают страницу
+    if (link.hasAttribute('data-open-contact')) {
+      if (navMenu.classList.contains('is-open')) toggleMobileMenu();
+      return;
+    }
+
     // Если секция с таким id действительно существует на странице —
     // прокручиваем к ней вручную и отменяем стандартное поведение ссылки
     if (targetSection) {
@@ -88,58 +94,67 @@ window.addEventListener('scroll', function () {
 
 
 /* --------------------------------------------------------------------------
-   4. ОБРАБОТКА ФОРМЫ ЗАЯВКИ
-   Важно: это только клиентская (браузерная) проверка и имитация отправки.
-   Реальной отправки на сервер здесь нет — заявки никуда не сохраняются.
-   Чтобы заявки приходили вам на почту/в мессенджер, нужно:
-     а) подключить готовый сервис форм (например, Яндекс.Формы, Google Forms,
-        Telegram-бота через его API) и отправлять туда fetch()-запросом, или
-     б) написать свой backend, который принимает POST-запрос с этими данными.
-   Место, куда добавить такой запрос, отмечено ниже комментарием.
+   4. ОКНО «СВЯЗАТЬСЯ С ТРЕНЕРОМ»
+   Любая кнопка/ссылка с атрибутом data-open-contact открывает окно
+   с номером тренера и ссылками на мессенджеры. Закрыть можно крестиком,
+   кликом по тёмному фону или клавишей Esc.
    -------------------------------------------------------------------------- */
 
-const applicationForm = document.getElementById('application-form-el');
-const formMessage = document.getElementById('form-message');
+const contactModal = document.getElementById('contact-modal');
+let lastFocused = null;
 
-applicationForm.addEventListener('submit', function (event) {
-  // Отменяем стандартную отправку формы (перезагрузку страницы)
-  event.preventDefault();
-
-  // Считываем значения полей
-  const name = applicationForm.name.value.trim();
-  const phone = applicationForm.phone.value.trim();
-  const direction = applicationForm.direction.value;
-  const agree = applicationForm.agree.checked;
-
-  // Простая проверка телефона: должно быть не меньше 10 цифр.
-  // Это не строгая валидация номера, а лишь защита от совсем пустых
-  // или случайных значений — этого достаточно для формы такого типа.
-  const digitsOnly = phone.replace(/\D/g, ''); // убираем всё, кроме цифр
-
-  if (name === '' || digitsOnly.length < 10 || direction === '' || !agree) {
-    showFormMessage('Пожалуйста, заполните имя, корректный телефон, направление и согласие.', 'error');
-    return;
-  }
-
-  // --- Здесь в реальном проекте должна быть отправка данных на сервер ---
-  // Например:
-  // fetch('/api/application', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ name, phone, direction })
-  // });
-  console.log('Новая заявка:', { name, phone, direction });
-
-  showFormMessage('Спасибо! Заявка отправлена, администратор свяжется с вами в ближайшее время.', 'success');
-  applicationForm.reset();
-});
-
-// Вспомогательная функция: показывает текст под формой нужным цветом
-function showFormMessage(text, type) {
-  formMessage.textContent = text;
-  formMessage.className = 'form__message form__message--' + type;
+function openContactModal() {
+  lastFocused = document.activeElement;
+  contactModal.hidden = false;
+  document.body.classList.add('modal-open');
+  contactModal.querySelector('.modal__close').focus();
 }
 
+function closeContactModal() {
+  contactModal.hidden = true;
+  document.body.classList.remove('modal-open');
+  if (lastFocused) lastFocused.focus();
+}
+
+document.querySelectorAll('[data-open-contact]').forEach(function (el) {
+  el.addEventListener('click', function (event) {
+    event.preventDefault();
+    openContactModal();
+  });
+});
+
+document.querySelectorAll('[data-close-contact]').forEach(function (el) {
+  el.addEventListener('click', closeContactModal);
+});
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape' && !contactModal.hidden) closeContactModal();
+});
+
+
+// Кнопка «Скопировать номер»
+const copyButton = document.getElementById('copy-phone');
+
+copyButton.addEventListener('click', function () {
+  const phone = copyButton.dataset.phone;
+  const done = function () {
+    copyButton.textContent = 'Номер скопирован ✓';
+    setTimeout(function () { copyButton.textContent = 'Скопировать номер'; }, 2000);
+  };
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(phone).then(done);
+  } else {
+    // запасной вариант для старых браузеров
+    const field = document.createElement('textarea');
+    field.value = phone;
+    document.body.appendChild(field);
+    field.select();
+    document.execCommand('copy');
+    field.remove();
+    done();
+  }
+});
 
 /* --------------------------------------------------------------------------
    5. ТЕКУЩИЙ ГОД В ПОДВАЛЕ
