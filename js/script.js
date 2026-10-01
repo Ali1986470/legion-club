@@ -157,6 +157,47 @@ copyButton.addEventListener('click', function () {
 });
 
 /* --------------------------------------------------------------------------
+   ПОЯВЛЕНИЕ БЛОКОВ ПРИ ПРОКРУТКЕ И ПОДСВЕТКА ПУНКТА МЕНЮ
+   Если IntersectionObserver недоступен — просто показываем всё сразу.
+   -------------------------------------------------------------------------- */
+
+document.documentElement.classList.add('js');
+
+const revealItems = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(function (el) { revealObserver.observe(el); });
+
+  // Подсветка текущего раздела в меню
+  const navLinks = document.querySelectorAll('.nav__link');
+  const sectionObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (link) {
+          link.classList.toggle('is-current', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+
+  document.querySelectorAll('main section[id], footer[id]').forEach(function (section) {
+    sectionObserver.observe(section);
+  });
+} else {
+  revealItems.forEach(function (el) { el.classList.add('is-visible'); });
+}
+
+
+/* --------------------------------------------------------------------------
    5. ТЕКУЩИЙ ГОД В ПОДВАЛЕ
    Чтобы не переписывать "© 2026" вручную каждый год, подставляем год
    автоматически через объект Date.
